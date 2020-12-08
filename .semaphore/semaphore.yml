@@ -1,13 +1,30 @@
 version: v1.0
-name: Initial Pipeline
+name: Run tests
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: 'Block #1'
+  - name: Install dependencies
     task:
       jobs:
-        - name: 'Job #1'
+        - name: bundle install
           commands:
             - checkout
+            - cache restore
+            - bundle install --deployment --path vendor/bundle
+            - cache store
+  - name: Tests
+    task:
+      jobs:
+        - name: rspec
+          commands:
+            - checkout
+            - cache restore
+            - bundle install --deployment --path vendor/bundle
+            - bundle exec rspec
+promotions:
+  - name: Dockerize
+    pipeline_file: docker-build.yml
+    auto_promote_on:
+      - result: passed
