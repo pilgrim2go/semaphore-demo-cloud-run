@@ -22,6 +22,7 @@ blocks:
           commands:
             - checkout
             - cache restore
+            - bundle update --bundler
             - bundle install --deployment --path vendor/bundle
             - bundle exec rspec
 promotions:
