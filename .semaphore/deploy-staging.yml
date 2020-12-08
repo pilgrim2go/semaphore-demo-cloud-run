@@ -14,4 +14,4 @@ blocks:
           commands:
             - gcloud auth activate-service-account --key-file=.secrets.gcp.json
             - gcloud auth configure-docker -q
-            - 'gcloud beta run deploy semaphore-demo-cloud-run-stg --platform managed --project swift-climate-296603 --image gcr.io/swift-climate-296603/semaphore-demo-cloud-run:${SEMAPHORE_GIT_SHA:0:7} --region us-central1'
+            - 'gcloud beta run deploy semaphore-demo-cloud-run-stg --allow-unauthenticated --platform managed --project swift-climate-296603 --image gcr.io/swift-climate-296603/semaphore-demo-cloud-run:${SEMAPHORE_GIT_SHA:0:7} --region us-central1'
