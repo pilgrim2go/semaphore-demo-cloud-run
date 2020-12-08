@@ -15,3 +15,9 @@ blocks:
             - gcloud auth activate-service-account --key-file=.secrets.gcp.json
             - gcloud auth configure-docker -q
             - 'gcloud beta run deploy semaphore-demo-cloud-run-stg --allow-unauthenticated --platform managed --project swift-climate-296603 --image gcr.io/swift-climate-296603/semaphore-demo-cloud-run:${SEMAPHORE_GIT_SHA:0:7} --region us-central1'
+  - name: E2E Test
+    task:
+      jobs:
+        - name: Check case 1
+          commands:
+            - 'curl https://endtest.io/api.php?action=runTestSuite&appId=33254361&appCode=83402662&testSuite=139572&selectedPlatform=windows&selectedOs=a&selectedBrowser=chrome&selectedResolution=d&selectedLocation=sanfrancisco&selectedCases=all&writtenAdditionalNotes='
